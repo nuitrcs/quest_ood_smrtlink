@@ -8,6 +8,9 @@ form:
   # What version of the code do you want to run
   - version
   - smrtlink_jobdir_directory
+  - smrtlink_slurm_account
+  - smrtlink_slurm_walltime
+  - smrtlink_slurm_partition
   - smrtlink_database_directory
   - smrtlink_root_directory
   # This allows the user to select which partition they submit to
@@ -48,6 +51,21 @@ attributes:
     label: "Provide the absolute path to the directory where you would like SMRTLink jobs to output their data."
     help: |
       Provide the absolute path to the directory where you would like SMRTLink jobs to output their data. Please ensure this is in a folder that is either in `/projects/` or `/scratch` and not your HOME directory. 
+
+  smrtlink_slurm_account:
+    label: "This is the account you want to use for the job submissions that SMRT Link makes."
+    help: |
+        This is the account you want to use for the job submissions that SMRT Link makes. This is not the account being used to submit this Quest OnDemand job.
+
+  smrtlink_slurm_partition:
+    label: "This is the partition you want to use for the job submissions that SMRT Link makes."
+    help: |
+        This is the partition you want to use for the job submissions that SMRT Link makes. This is not the partition being used to submit this Quest OnDemand job.
+
+  smrtlink_slurm_walltime:
+    label: "This is the walltime you want to use for the job submissions that SMRT Link makes (HH:MM:SS)."
+    help: |
+        This is the walltime you want to use for the job submissions that SMRT Link makes. This is not the walltime being used to submit this Quest OnDemand job.
 
   smrtlink_database_directory:
     label: "(Optional) Provide the absolute path to the directory you want to use for the SMRTLink database. Leave blank for the default which is `${HOME}/.smartdata25`."

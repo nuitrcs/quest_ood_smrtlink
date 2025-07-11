@@ -83,8 +83,8 @@ computecfg_00__jmstype='Slurm';
 computecfg_00__cromwell_loglevel='__USE_DEFAULT__';   # Current val: 'INFO'
 computecfg_00__cromwell_concurrent_job_limit='__USE_DEFAULT__';  # Current val: '500'
 computecfg_00__slurm_bindir='/usr/bin';
-computecfg_00__slurm_partition='<%= context.slurm_partition %>';
-computecfg_00__slurm_startargs='--account <%= context.slurm_account %> --time 24:00:00';
+computecfg_00__slurm_partition='<%= context.smrtlink_slurm_partition %>';
+computecfg_00__slurm_startargs='--account <%= context.smrtlink_slurm_account %> --time <%= context.smrtlink_slurm_walltime %>';
 computecfg_00__slurm_useraccting='false';
 computecfg_00__slurm_memrequest='false';
 computecfg_00__slurm_slurmconf='/etc/slurm/slurm.conf';
