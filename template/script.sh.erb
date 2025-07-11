@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+<%
+session_dir = session.staged_root
+fileObject = File.open("#{Dir.home}/.groupdata_ondemand_out.txt", "r");
+all_slurm_allocations = fileObject.read();
+fileObject.close();
+list_of_general_access_allocations = []
+list_of_buyin_allocations = []
+all_slurm_allocations = all_slurm_allocations.split(",")
+all_slurm_allocations.each do |slurm_allocation|
+    if slurm_allocation.include? "p"
+        list_of_general_access_allocations.append(slurm_allocation)
+    elsif slurm_allocation.include? "b"
+        list_of_buyin_allocations.append(slurm_allocation)
+    end
+end
+%>
+  
+# Clean the environment 
+module purge
+
+# Set working directory to HOME
+cd "${HOME}"
+
+# Set variables
+export WORKING_DIR="<%= session_dir %>"
+
+# CREATE configuration script
+cat << EOF > ${WORKING_DIR}/smrtlink.config
+# smrtlink config
+
+# 'install' settings
+install__user='$USER';
+install__group='$USER';
+install__sluuid='95d45781-29e8-408c-83c0-36189fc0f8a0';
+install__umask='__USE_DEFAULT__';                # Current val: '0022'
+
+# 'system' settings
+system__memtotal='__USE_DEFAULT__';              # Current val: '208305913856'
+
+# 'smrtlink' settings
+smrtlink__dnsname='$host';
+smrtlink__gui_port='$SMRTLINK_GUI_PORT';            # Current val: '9090'
+smrtlink__services_port='$SMRTLINK_SERVICES_PORT';       # Current val: '9091'
+smrtlink__services_minmem='__USE_DEFAULT__';     # Current val: '32768'
+smrtlink__services_maxmem='__USE_DEFAULT__';     # Current val: '32768'
+smrtlink__ics_services_minmem='__USE_DEFAULT__';  # Current val: '19840'
+smrtlink__ics_services_maxmem='__USE_DEFAULT__';  # Current val: '19840'
+smrtlink__mail_host='__USE_DEFAULT__';           # Current val: ''
+smrtlink__mail_port='__USE_DEFAULT__';           # Current val: '25'
+smrtlink__mail_user='__USE_DEFAULT__';           # Current val: ''
+smrtlink__mail_password='__USE_DEFAULT__';       # Current val: ''
+smrtlink__nworkers='__USE_DEFAULT__';                 # Current val: '32'
+smrtlink__extended_cell_use_enable='__USE_DEFAULT__';  # Current val: 'false'
+smrtlink__pacbio_internal='__USE_DEFAULT__';     # Current val: 'false'
+
+# 'remote' settings
+remote__eve_server_select='__USE_DEFAULT__';     # Current val: 'production'
+remote__eve_url='__USE_DEFAULT__';               # Current val: ''
+remote__update_server_select='__USE_DEFAULT__';  # Current val: 'production'
+remote__update_url='__USE_DEFAULT__';            # Current val: ''
+remote__update_enable='false';
+
+# 'cromwell' settings
+cromwell__port='$SMRTLINK_CROMWELL_PORT';                # Current val: '9096'
+
+# 'database' settings
+database__dbport='$SMRTLINK_DATABASE_PORT';              # Current val: '9095'
+database__dbdatadir='<%= context.smrtlink_database_directory %>';
+
+# 'datadirs' settings
+datadirs__jobsroot_dir='<%= context.smrtlink_job_directory %>';
+datadirs__jobsroot_umask='__USE_DEFAULT__';   # Current val: '0022'
+datadirs__tmpdir_dir='__USE_DEFAULT__';       # Current val: '/tmp/smrtlink'
+
+# 'computecfg_00' settings
+computecfg_00__name='Quest';
+computecfg_00__enable='__USE_DEFAULT__';              # Current val: 'true'
+computecfg_00__menuorder='__USE_DEFAULT__';           # Current val: '1'
+computecfg_00__nproc='__USE_DEFAULT__';               # Current val: '7'
+computecfg_00__maxchunks='__USE_DEFAULT__';           # Current val: '24'
+computecfg_00__jmstype='Slurm';
+computecfg_00__cromwell_loglevel='__USE_DEFAULT__';   # Current val: 'INFO'
+computecfg_00__cromwell_concurrent_job_limit='__USE_DEFAULT__';  # Current val: '500'
+computecfg_00__slurm_bindir='/usr/bin';
+computecfg_00__slurm_partition='<%= context.slurm_partition %>';
+computecfg_00__slurm_startargs='--account <%= context.slurm_account %> --time 24:00:00';
+computecfg_00__slurm_useraccting='false';
+computecfg_00__slurm_memrequest='true';
+computecfg_00__slurm_slurmconf='/etc/slurm/slurm.conf';
+
+# 'internal' settings
+internal__version='smrtlink-release_25.1.0.257715';
+EOF
+
+module purge
+module load <%= context.version %>
+if [ -f ${WORKING_DIR}/.first_run ]
+then
+    /software/smrtlink/25.1/smrtlink.run --rootdir <%= context.smrtlink_root_directory %> --configfile ${WORKING_DIR}/smrtlink.config
+else
+    smrtlink.run --reconfig --configfile ${WORKING_DIR}/smrtlink.config
+fi
