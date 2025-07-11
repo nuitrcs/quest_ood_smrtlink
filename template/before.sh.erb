@@ -2,8 +2,12 @@
 [[ $(type -t module) == "function" ]] && export -f module
 
 # Find available port to run server on
-port=$(find_port localhost 7000 11000 )
+port=8243
 export SMRTLINK_GUI_PORT=$port
 export SMRTLINK_SERVICES_PORT=$(find_port localhost 7000 11000 )
 export SMRTLINK_CROMWELL_PORT=$(find_port localhost 7000 11000 )
 export SMRTLINK_DATABASE_PORT=$(find_port localhost 7000 11000 )
+
+# This is for conn_params
+export ssh_tunnel="ssh -L ${port}:localhost:${port} $USER@login.quest.northwestern.edu ssh -N -L ${port}:localhost:${port} ${host}"
+export connection_string="http://localhost:${port}"
