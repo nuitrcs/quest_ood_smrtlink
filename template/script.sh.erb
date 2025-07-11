@@ -66,10 +66,10 @@ cromwell__port='$SMRTLINK_CROMWELL_PORT';                # Current val: '9096'
 
 # 'database' settings
 database__dbport='$SMRTLINK_DATABASE_PORT';              # Current val: '9095'
-database__dbdatadir='<%= context.smrtlink_database_directory %>';
+database__dbdatadir='$SMRTLINK_DATABASEDIR';
 
 # 'datadirs' settings
-datadirs__jobsroot_dir='<%= context.smrtlink_job_directory %>';
+datadirs__jobsroot_dir='$SMRTLINK_JOBDIR';
 datadirs__jobsroot_umask='__USE_DEFAULT__';   # Current val: '0022'
 datadirs__tmpdir_dir='__USE_DEFAULT__';       # Current val: '/tmp/smrtlink'
 
@@ -86,7 +86,7 @@ computecfg_00__slurm_bindir='/usr/bin';
 computecfg_00__slurm_partition='<%= context.slurm_partition %>';
 computecfg_00__slurm_startargs='--account <%= context.slurm_account %> --time 24:00:00';
 computecfg_00__slurm_useraccting='false';
-computecfg_00__slurm_memrequest='true';
+computecfg_00__slurm_memrequest='false';
 computecfg_00__slurm_slurmconf='/etc/slurm/slurm.conf';
 
 # 'internal' settings
@@ -97,7 +97,17 @@ module purge
 module load <%= context.version %>
 if [ -f ${WORKING_DIR}/.first_run ]
 then
-    /software/smrtlink/25.1/smrtlink.run --rootdir <%= context.smrtlink_root_directory %> --configfile ${WORKING_DIR}/smrtlink.config
+    smrtlink.run --rootdir $SMRTLINK_ROOTDIR --configfile ${WORKING_DIR}/smrtlink.config --install --batch
 else
-    smrtlink.run --reconfig --configfile ${WORKING_DIR}/smrtlink.config
+    smrtlink.run --rootdir $SMRTLINK_ROOTDIR --configfile ${WORKING_DIR}/smrtlink.config --reconfig --batch
 fi
+
+$SMRTLINK_ROOTDIR/admin/bin/services-start
+
+sleep 3600
+# Get the PID of the last xstata-mp process started that I own
+#stata_pid=$( pgrep -u "$USER" 'xstata-mp' | tail )
+# As long as the PID directory exists we wait
+#while [[ -d "/proc/$stata_pid" ]]; do
+#  sleep 60
+#done

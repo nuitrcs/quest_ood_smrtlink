@@ -1,7 +1,7 @@
 # Wait for the SMRTLink Server server to start
 echo "Waiting for SMRTLink Server server to open port ${port}..."
 echo "TIMING - Starting wait at: $(date)"
-if wait_until_port_used "${host}:${port}" 180; then
+if wait_until_port_used "${host}:8243" 720; then
   echo "Discovered SMRTLink Server server listening on port ${port}!"
   echo "TIMING - Wait ended at: $(date)"
 else
