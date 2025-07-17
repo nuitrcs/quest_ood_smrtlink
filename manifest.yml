@@ -5,7 +5,9 @@ category: Interactive Apps
 subcategory: Servers
 role: batch_connect
 description: |
-  This app will launch the [SMRTLink] Server on the [Quest cluster].
+  This app will launch the [SMRT Link] Server on the [Quest cluster].
 
-  [SMRTLink]: https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=2234
+  Please note that the very first time that you run SMRT Link, it will install SMRT Link into the SMRTROOT directory. *This process can take up to 10 minutes.*
+
+  [SMRTLink]: https://www.pacb.com/smrt-link/
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html

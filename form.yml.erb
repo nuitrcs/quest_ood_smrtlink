@@ -43,14 +43,14 @@ attributes:
   version:
     widget: select
     label: "SMRTlink version"
-    help: "What version of SMRTLink would you like to launch"
+    help: "What version of SMRT Link would you like to launch"
     options:
-      - [ "SMRTLink 25.1", "smrtlink/25.1" ]
+      - [ "SMRT Link 25.1", "smrtlink/25.1" ]
 
   smrtlink_jobdir_directory:
-    label: "Provide the absolute path to the directory where you would like SMRTLink jobs to output their data."
+    label: "Provide the absolute path to the directory where you would like SMRT Link jobs to output their data."
     help: |
-      Provide the absolute path to the directory where you would like SMRTLink jobs to output their data. Please ensure this is in a folder that is either in `/projects/` or `/scratch` and not your HOME directory. 
+      Provide the absolute path to the directory where you would like SMRT Link jobs to output their data. Please ensure this is in a folder that is either in `/projects/` or `/scratch` and not your HOME directory. 
 
   smrtlink_slurm_account:
     label: "This is the account you want to use for the job submissions that SMRT Link makes."
@@ -68,14 +68,14 @@ attributes:
         This is the walltime you want to use for the job submissions that SMRT Link makes. This is not the walltime being used to submit this Quest OnDemand job.
 
   smrtlink_database_directory:
-    label: "(Optional) Provide the absolute path to the directory you want to use for the SMRTLink database. Leave blank for the default which is `${HOME}/.smartdata25`."
+    label: "(Optional) Provide the absolute path to the directory you want to use for the SMRT Link database. Leave blank for the default which is `${HOME}/.smartdata25`."
     help: |
-      (Optional) Provide the absolute path to the directory you want to use for the SMRTLink database. For the purposes of contiguity between SMRTLink sessions, please make sure that this folder is *always* the same each time you submit a SMRTLink job. Leave blank for the default which is `${HOME}/.smartdata25`."
+      (Optional) Provide the absolute path to the directory you want to use for the SMRT Link database. For the purposes of contiguity between SMRT Link sessions, please make sure that this folder is *always* the same each time you submit a SMRT Link job. Leave blank for the default which is `${HOME}/.smartdata25`."
 
   smrtlink_root_directory:
-    label: "(Optional) Provide the absolute path to the directory you want to use for the SMRTLink database. Leave blank for the default which is `${HOME}/.smartlink25`."
+    label: "(Optional) Provide the absolute path to the directory you want to use for the SMRT Link root directory. This is where your personally configured version of SMRT Link will be installed. Leave blank for the default which is `${HOME}/.smartlink25`."
     help: |
-      (Optional) Provide the absolute path to the directory you want to use for the SMRTLink database. For the purposes of contiguity between SMRTLink sessions, please make sure that this folder is *always* the same each time you submit a SMRTLink job. Leave blank for the default which is `${HOME}/.smartlink25`."
+      (Optional) Provide the absolute path to the directory you want to use for the SMRT Link root directory. This is where your personally configured version of SMRT Link will be installed. For the purposes of contiguity between SMRT Link sessions, please make sure that this folder is *always* the same each time you submit a SMRT Link job. Leave blank for the default which is `${HOME}/.smartlink25`."
 
   bc_num_hours:
     label: "Wall Time (in number of hours)"
