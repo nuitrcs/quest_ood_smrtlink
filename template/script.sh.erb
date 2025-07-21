@@ -25,6 +25,9 @@ cd "${HOME}"
 # Set variables
 export WORKING_DIR="<%= session_dir %>"
 
+## Create the temporary directory that SMRT Link Expects
+mkdir -p /tmp/smrtlink
+
 # CREATE configuration script
 cat << EOF > ${WORKING_DIR}/smrtlink.config
 # smrtlink config
@@ -104,10 +107,4 @@ fi
 
 $SMRTLINK_ROOTDIR/admin/bin/services-start
 
-sleep 3600
-# Get the PID of the last xstata-mp process started that I own
-#stata_pid=$( pgrep -u "$USER" 'xstata-mp' | tail )
-# As long as the PID directory exists we wait
-#while [[ -d "/proc/$stata_pid" ]]; do
-#  sleep 60
-#done
+sleep $(($SLURM_JOB_END_TIME - $SLURM_JOB_START_TIME))
