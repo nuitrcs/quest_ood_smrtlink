@@ -10,4 +10,4 @@ export SMRTLINK_DATABASE_PORT=$(find_port localhost 7000 11000 )
 
 # This is for conn_params
 export ssh_tunnel="ssh -L ${port}:localhost:${port} $USER@login.quest.northwestern.edu ssh -N -L ${port}:localhost:${port} ${host}"
-export connection_string="http://localhost:${port}"
+export connection_string="https://localhost:${port}"
