@@ -26,7 +26,7 @@ cd "${HOME}"
 export WORKING_DIR="<%= session_dir %>"
 
 ## Create the temporary directory that SMRT Link Expects
-mkdir -p /tmp/smrtlink
+mkdir -p /tmp/$USER/smrtlink
 
 # CREATE configuration script
 cat << EOF > ${WORKING_DIR}/smrtlink.config
@@ -74,7 +74,7 @@ database__dbdatadir='$SMRTLINK_DATABASEDIR';
 # 'datadirs' settings
 datadirs__jobsroot_dir='$SMRTLINK_JOBDIR';
 datadirs__jobsroot_umask='__USE_DEFAULT__';   # Current val: '0022'
-datadirs__tmpdir_dir='__USE_DEFAULT__';       # Current val: '/tmp/smrtlink'
+datadirs__tmpdir_dir='/tmp/$USER/smrtlink';       # Current val: '/tmp/smrtlink'
 
 # 'computecfg_00' settings
 computecfg_00__name='Quest';
