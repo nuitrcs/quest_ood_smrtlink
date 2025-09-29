@@ -100,6 +100,10 @@ script:
      # How much time (in hours)
      - "--time"
      - "<%= walltime %>"
+     # Node to exclude
+     <%- if exclude_node != "" %>
+     - "--exclude"
+     - "<%= exclude_node %>"
      # How many nodes (always 1)
      <%- if number_of_nodes != "" %>
      - "--nodes"
