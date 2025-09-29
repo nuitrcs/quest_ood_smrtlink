@@ -38,6 +38,7 @@ form:
   # these variables are for the JavaScript
   - raw_data
   - raw_group_data
+  - exclude_node
 
 attributes:
   version:
@@ -166,3 +167,6 @@ attributes:
     widget: hidden_field
     value: "<%= RawSlurmData.rawgroupdata %>"
     cacheable: false
+
+  exclude_node:
+    label: "Nodes to exclude"
