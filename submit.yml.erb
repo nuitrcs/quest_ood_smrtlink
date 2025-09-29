@@ -104,6 +104,7 @@ script:
      <%- if exclude_node != "" %>
      - "--exclude"
      - "<%= exclude_node %>"
+     <%- end %>
      # How many nodes (always 1)
      <%- if number_of_nodes != "" %>
      - "--nodes"
