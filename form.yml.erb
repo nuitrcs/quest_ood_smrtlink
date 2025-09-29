@@ -33,12 +33,13 @@ form:
   - user_email
   # Allow the user to provide a Slurm "constraint" option
   - constraint
+  # Allow the user to exclude nodes
+  - exclude_node
   # Name of the Slurm job
   - job_name
   # these variables are for the JavaScript
   - raw_data
   - raw_group_data
-  - exclude_node
 
 attributes:
   version:
@@ -153,7 +154,7 @@ attributes:
     widget: "select"
 
   exclude_node:
-    label: "Nodes to exclude"
+    label: "Nodes to exclude (Optional)"
     help: |
       Multiple SMRTLink sessions cannot be run on the same node. If your job fails to launch because of multiple instances, please not the node you landed on and then add it here to be exluded when you resubmit the job. 
 
