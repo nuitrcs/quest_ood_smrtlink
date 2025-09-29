@@ -152,6 +152,11 @@ attributes:
       Not all Quest compute nodes are the same. We currently have four different generations or architectures of compute nodes which we refer to as quest9, quest10, quest11, and quest12. This will set the value of the `--constraint` flag for your job. For more information on setting the constraint option, please see the [constraint section](https://services.northwestern.edu/TDClient/30/Portal/KB/ArticleDet?ID=1964#section-constraints) of our Everything You Need to Know about Using Slurm on Quest page.
     widget: "select"
 
+  exclude_node:
+    label: "Nodes to exclude"
+    help: |
+      Multiple SMRTLink sessions cannot be run on the same node. If your job fails to launch because of multiple instances, please not the node you landed on and then add it here to be exluded when you resubmit the job. 
+
   job_name:
     label: "Name of the Job"
     value: "SOME JOB"
@@ -168,5 +173,3 @@ attributes:
     value: "<%= RawSlurmData.rawgroupdata %>"
     cacheable: false
 
-  exclude_node:
-    label: "Nodes to exclude"
