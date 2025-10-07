@@ -1,6 +1,6 @@
 ---
 name: SMRTLink
-icon: fa://desktop
+icon: fa://server
 category: Interactive Apps
 subcategory: Servers
 role: batch_connect
@@ -9,5 +9,5 @@ description: |
 
   Please note that the very first time that you run SMRT Link, it will install SMRT Link into the SMRTROOT directory. *This process can take up to 10 minutes.*
 
-  [SMRTLink]: https://www.pacb.com/smrt-link/
+  [SMRT Link]: https://www.pacb.com/smrt-link/
   [Quest cluster]: https://www.it.northwestern.edu/departments/it-services-support/research/computing/quest/index.html
